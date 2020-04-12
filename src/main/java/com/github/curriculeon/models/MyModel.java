@@ -1,6 +1,8 @@
 package com.github.curriculeon.models;
 
 
+import com.github.curriculeon.utils.Jsonifier;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -51,5 +53,10 @@ public class MyModel {
     @Override
     public int hashCode() {
         return Objects.hash(id, name);
+    }
+
+    @Override
+    public String toString() {
+        return Jsonifier.jsonify(this);
     }
 }
