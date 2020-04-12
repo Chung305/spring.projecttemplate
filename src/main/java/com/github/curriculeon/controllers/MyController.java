@@ -2,6 +2,7 @@ package com.github.curriculeon.controllers;
 
 import com.github.curriculeon.services.MyService;
 import com.github.curriculeon.models.MyModel;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 public class MyController {
     private MyService service;
 
+    @Autowired
     public MyController(MyService service) {
         this.service = service;
     }
