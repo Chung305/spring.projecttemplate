@@ -4,10 +4,9 @@ package com.github.curriculeon.utils;
  * @author leonhunter
  * @created 04/09/2020 - 9:28 PM
  */
-
-import com.github.obc.webserver.utils.controllers.SimpleControllerInterface;
-import com.github.obc.webserver.utils.services.EntityInterface;
-import com.github.obc.webserver.utils.services.SimpleServiceInterface;
+import com.github.curriculeon.utils.controllers.SimpleControllerInterface;
+import com.github.curriculeon.utils.services.EntityInterface;
+import com.github.curriculeon.utils.services.SimpleServiceInterface;
 import org.junit.Assert;
 import org.mockito.BDDMockito;
 import org.springframework.data.repository.CrudRepository;

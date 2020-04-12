@@ -2,6 +2,7 @@ package com.github.curriculeon.models;
 
 
 import com.github.curriculeon.utils.Jsonifier;
+import com.github.curriculeon.utils.services.EntityInterface;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,7 +11,7 @@ import javax.persistence.Id;
 import java.util.Objects;
 
 @Entity
-public class MyModel {
+public class MyModel implements EntityInterface<Long> {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -25,6 +26,7 @@ public class MyModel {
         this.name = name;
     }
 
+    @Override
     public Long getId() {
         return id;
     }

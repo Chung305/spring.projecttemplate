@@ -3,6 +3,8 @@ package com.github.curriculeon.controllers;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.curriculeon.models.MyModel;
 import com.github.curriculeon.repositories.MyRepository;
+import com.github.curriculeon.services.MyService;
+import com.github.curriculeon.utils.SimpleControllerTestInterface;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.BDDMockito;
@@ -25,44 +27,35 @@ import java.util.Optional;
 @SpringBootTest
 @AutoConfigureMockMvc
 @RunWith(SpringRunner.class)
-public class MyControllerTest {
-
+public class MyControllerTest implements SimpleControllerTestInterface<Long, MyModel, MyRepository, MyService, MyController> {
     @Autowired
     private MockMvc mvc;
-
 
     @MockBean
     private MyRepository repository;
 
     @Test
-    public void testShow() throws Exception {
-        Long givenId = 1L;
-        MyModel myModel = new MyModel();
-        BDDMockito
-                .given(repository.findById(givenId))
-                .willReturn(Optional.of(myModel));
-        String expectedContent = new ObjectMapper().writeValueAsString(myModel);
-        this.mvc.perform(MockMvcRequestBuilders
-                .get("/my-controller/" + givenId))
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.content().string(expectedContent));
+    public void test() throws Exception {
+        testFindById(1L, MyModel::new);
     }
 
     @Test
     public void testCreate() throws Exception {
-        MyModel myModel = new MyModel();
-        BDDMockito
-                .given(repository.save(myModel))
-                .willReturn(myModel);
+        testCreate(MyModel::new);
+    }
 
-        String expectedContent = new ObjectMapper().writeValueAsString(myModel);
-        this.mvc.perform(MockMvcRequestBuilders
-                .post("/my-controller/")
-                .content(expectedContent)
-                .accept(MediaType.APPLICATION_JSON)
-                .contentType(MediaType.APPLICATION_JSON)
-            )
-                .andExpect(MockMvcResultMatchers.status().isCreated())
-                .andExpect(MockMvcResultMatchers.content().string(expectedContent));
+    @Override
+    public String getUrlTemplate() {
+        return "/my-controller/";
+    }
+
+    @Override
+    public MyRepository getCrudRepository() {
+        return repository;
+    }
+
+    @Override
+    public MockMvc getMockMvc() {
+        return mvc;
     }
 }

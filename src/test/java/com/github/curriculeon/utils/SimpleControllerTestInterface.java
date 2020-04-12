@@ -1,9 +1,10 @@
 package com.github.curriculeon.utils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.obc.webserver.utils.controllers.SimpleControllerInterface;
-import com.github.obc.webserver.utils.services.EntityInterface;
-import com.github.obc.webserver.utils.services.SimpleServiceInterface;
+import com.github.curriculeon.utils.controllers.SimpleControllerInterface;
+import com.github.curriculeon.utils.services.EntityInterface;
+import com.github.curriculeon.utils.services.SimpleServiceInterface;
+import org.junit.Test;
 import org.mockito.BDDMockito;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.http.MediaType;

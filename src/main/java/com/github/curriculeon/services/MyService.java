@@ -1,39 +1,19 @@
 package com.github.curriculeon.services;
 
-import com.github.curriculeon.repositories.MyRepository;
 import com.github.curriculeon.models.MyModel;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.github.curriculeon.repositories.MyRepository;
+import com.github.curriculeon.utils.services.AbstractSimpleService;
 import org.springframework.stereotype.Service;
 
 @Service
-public class MyService {
-    private MyRepository repository;
-
-    @Autowired
-    public MyService(MyRepository repository) {
-        this.repository = repository;
+public class MyService extends AbstractSimpleService<Long, MyModel, MyRepository> {
+    public MyService(MyRepository crudRepository) {
+        super(crudRepository);
     }
 
-    public Iterable<MyModel> index() {
-        return repository.findAll();
-    }
-
-    public MyModel show(Long id) {
-        return repository.findById(id).get();
-    }
-
-    public MyModel create(MyModel myModel) {
-        return repository.save(myModel);
-    }
-
-    public MyModel update(Long id, MyModel newMyModelData) {
-        MyModel originalMyModel = repository.findById(id).get();
-        originalMyModel.setName(newMyModelData.getName());
-        return repository.save(originalMyModel);
-    }
-
-    public Boolean delete(Long id) {
-        repository.deleteById(id);
-        return true;
+    @Override
+    public MyModel update(MyModel existingData, MyModel newEntityData) {
+        existingData.setName(newEntityData.getName());
+        return getRepository().save(existingData);
     }
 }
