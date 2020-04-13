@@ -1,24 +1,17 @@
 package com.github.curriculeon.controllers;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.curriculeon.models.MyModel;
-import com.github.curriculeon.repositories.MyRepository;
-import com.github.curriculeon.services.MyService;
+import com.github.curriculeon.repositories.MyModelRepository;
+import com.github.curriculeon.services.MyModelService;
 import com.github.curriculeon.utils.SimpleControllerTestInterface;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.BDDMockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-
-import java.util.Optional;
 
 
 /**
@@ -27,12 +20,12 @@ import java.util.Optional;
 @SpringBootTest
 @AutoConfigureMockMvc
 @RunWith(SpringRunner.class)
-public class MyControllerTest implements SimpleControllerTestInterface<Long, MyModel, MyRepository, MyService, MyController> {
+public class MyModelControllerTest implements SimpleControllerTestInterface<Long, MyModel, MyModelRepository, MyModelService, MyModelController> {
     @Autowired
     private MockMvc mvc;
 
     @MockBean
-    private MyRepository repository;
+    private MyModelRepository repository;
 
     @Test
     public void test() throws Exception {
@@ -50,7 +43,7 @@ public class MyControllerTest implements SimpleControllerTestInterface<Long, MyM
     }
 
     @Override
-    public MyRepository getCrudRepository() {
+    public MyModelRepository getCrudRepository() {
         return repository;
     }
 

@@ -3,7 +3,7 @@ package com.github.curriculeon.services;
 
 import com.github.curriculeon.MyApplication;
 
-import com.github.curriculeon.controllers.MyController;
+import com.github.curriculeon.controllers.MyModelController;
 import com.github.curriculeon.models.MyModel;
 import org.junit.Assert;
 import org.junit.Before;
@@ -21,13 +21,13 @@ import org.springframework.test.context.junit4.SpringRunner;
 @ContextConfiguration(classes = MyApplication.class)
 public class MyModelServiceTest {
     @MockBean
-    private MyService service;
+    private MyModelService service;
 
-    private MyController controller;
+    private MyModelController controller;
 
     @Before
     public void setup(){
-        this.controller = new MyController(service);
+        this.controller = new MyModelController(service);
     }
 
 
